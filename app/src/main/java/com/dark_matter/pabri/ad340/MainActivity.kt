@@ -14,11 +14,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dark_matter.pabri.ad340.forecast.CurrentForecastFragment
+import com.dark_matter.pabri.ad340.location.LocationEntryFragment
+import kotlinx.android.synthetic.main.fragment_current_forecast.*
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AppNavigator {
 
-    private val forecastRepository = ForecastRepository()
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,35 +29,12 @@ class MainActivity : AppCompatActivity() {
 
         tempDisplaySettingManager = TempDisplaySettingManager(this)
 
-        val zipcodeedittext: EditText = findViewById(R.id.zipcodeedittext)
-        val enterButton: Button = findViewById(R.id.submitbutton)
 
-        enterButton.setOnClickListener{
-            val zipcode: String =zipcodeedittext.text.toString()
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContainer,LocationEntryFragment())
+            .commit()
 
-            if(zipcode.length != 5){
-                Toast.makeText(this, R.string.zipcode_entry_error, Toast.LENGTH_SHORT).show()
-            }else{
-                forecastRepository.loadForecast(zipcode)
-            }
-
-            //Toast.makeText(this, "Submitted", Toast.LENGTH_SHORT).show()
-        }
-
-        val forecastList: RecyclerView = findViewById(R.id.forecastList)
-        forecastList.layoutManager = LinearLayoutManager(this)
-
-        val dailyForecastAdapter = DailyForecastAdapter(tempDisplaySettingManager){forecast ->
-            showForecastDetails(forecast)
-        }
-        forecastList.adapter = dailyForecastAdapter
-
-        val weeklyForecastObserver = Observer<List<DailyForecast>>{foreCastItems ->
-            // update our list adapter
-            dailyForecastAdapter.submitList(foreCastItems)
-        }
-
-        forecastRepository.weeklyForecast.observe(this, weeklyForecastObserver)
 
     }
 
@@ -76,11 +55,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun showForecastDetails(forecast: DailyForecast){
-        val forecastDetailsIntent = Intent(this, ForecastDetailsActivity::class.java)
-        forecastDetailsIntent.putExtra("key_temp", forecast.temp)
-        forecastDetailsIntent.putExtra("key_description", forecast.description)
-        startActivity(forecastDetailsIntent)
+    override fun navigateToCurrentForecast(zipcode: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, CurrentForecastFragment.newInstance(zipcode))
+            .commit()
     }
+
+    override fun navigateToCurrentEntry() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, LocationEntryFragment())
+            .commit()
+    }
+
 }
