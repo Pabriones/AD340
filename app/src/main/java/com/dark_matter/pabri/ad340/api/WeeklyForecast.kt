@@ -5,7 +5,7 @@ import java.util.*
 
 data class WeatherDescription(val main: String, val description: String, val icon: String)
 
-data class Temp (val main: Float, val max: Float)
+data class Temp (val min: Float, val max: Float)
 
 data class DailyForecast (
     @field:Json(name = "dt") val date: Long,

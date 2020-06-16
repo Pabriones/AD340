@@ -32,7 +32,7 @@ class CurrentForecastFragment : Fragment() {
     ): View? {
         tempDisplaySettingManager = TempDisplaySettingManager(requireContext())
 
-        val zipcode = arguments?.getString(KEY_ZIPCODE) ?: ""
+        //val zipcode = arguments?.getString(KEY_ZIPCODE) ?: ""
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_current_forecast, container, false)

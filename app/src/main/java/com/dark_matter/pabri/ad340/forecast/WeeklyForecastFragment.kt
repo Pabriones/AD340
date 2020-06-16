@@ -1,13 +1,12 @@
 package com.dark_matter.pabri.ad340.forecast
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +14,8 @@ import com.dark_matter.pabri.ad340.*
 import com.dark_matter.pabri.ad340.api.DailyForecast
 import com.dark_matter.pabri.ad340.api.WeeklyForecast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -35,24 +36,25 @@ class WeeklyForecastFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_weekly_forecast , container, false)
 
-        val locationEntryButton: FloatingActionButton = view.findViewById(R.id.locationEntryButton)
-        locationEntryButton.setOnClickListener{
-            showLocationEntry()
-        }
-
         val forecastList: RecyclerView = view.findViewById(R.id.forecastList)
         forecastList.layoutManager = LinearLayoutManager(requireContext())
 
-        val dailyForecastAdapter = DailyForecastAdapter(tempDisplaySettingManager){forecast ->
+        val dailyForecastAdapter = DailyForecastAdapter(tempDisplaySettingManager) {forecast ->
             showForecastDetails(forecast)
         }
         forecastList.adapter = dailyForecastAdapter
 
-        val weeklyForecastObserver = Observer<List<WeeklyForecast>>{ weeklyForecast ->
-            // update our list adapter
-            dailyForecastAdapter.submitList(weeklyForecast.daily)
+        val weeklyForecastObserver = Observer<WeeklyForecast> { WeeklyForecast ->
+            //update our list adapter
+            dailyForecastAdapter.submitList(WeeklyForecast.daily)
         }
+        // add an observer (lets us know when updates are made)
         forecastRepository.weeklyForecast.observe(viewLifecycleOwner, weeklyForecastObserver)
+
+        val locationEntryButton: FloatingActionButton = view.findViewById(R.id.locationEntryButton)
+        locationEntryButton.setOnClickListener {
+            showLocationEntry()
+        }
 
         locationRepository = LocationRepository(requireContext())
         val savedLocationObserver = Observer<Location> { savedLocation ->

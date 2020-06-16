@@ -1,6 +1,5 @@
 package com.dark_matter.pabri.ad340.api
 
-import com.dark_matter.pabri.ad340.Location
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -28,7 +27,7 @@ interface OpenWeatherMapService {
     @GET("/data/2.5/onecall")
     fun sevenDayForecast(
         @Query("lat") lat: Float,
-        @Query("long") lon: Float,
+        @Query("lon") lon: Float,
         @Query("exclude") exclude: String,
         @Query("units") units: String,
         @Query("appid") apiKey: String
