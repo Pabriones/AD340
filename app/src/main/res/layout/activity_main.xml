@@ -30,8 +30,9 @@
     <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="414dp"
-        android:layout_height="715dp"
+        android:layout_width="403dp"
+        android:layout_height="642dp"
+        android:layout_marginStart="4dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -39,6 +40,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.075"
         app:navGraph="@navigation/main_nav" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

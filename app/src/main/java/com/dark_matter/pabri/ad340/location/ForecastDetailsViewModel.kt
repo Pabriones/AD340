@@ -24,13 +24,13 @@ class ForecastDetailsViewModel (args: ForecastDetailsFragmentArgs) : ViewModel()
     private val _viewState: MutableLiveData<ForecastDetailsViewState> = MutableLiveData()
     val viewState: LiveData<ForecastDetailsViewState> = _viewState
 
-    init {
-        _viewState.value = ForecastDetailsViewState(
-            temp = args.temp,
-            description = args.description,
-            date = DATE_FORMAT.format(Date(args.date * 1000)),
-            iconUrl = "http://openweathermap.org/img/wn/${args.icon}@2x.png"
-        )
-    }
+//    init {
+//        _viewState.value = ForecastDetailsViewState(
+//            temp = args.temp,
+//            description = args.description,
+//            date = DATE_FORMAT.format(Date(args.date * 1000)),
+//            iconUrl = "http://openweathermap.org/img/wn/${args.icon}@2x.png"
+//        )
+//    }
 
 }

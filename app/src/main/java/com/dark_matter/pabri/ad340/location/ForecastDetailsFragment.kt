@@ -48,8 +48,8 @@ class ForecastDetailsFragment : Fragment() {
             //update the UI
             binding.tempText.text = formatTempForDisplay(viewState.temp, tempDisplaySettingManager.getTempDisplaySetting()  )
             binding.descriptionText.text = viewState.description
-            binding.dateText.text = viewState.date
-            binding.forecastIcon.load(viewState.iconUrl)
+            //binding.dateText.text = viewState.date
+            //binding.forecastIcon.load(viewState.iconUrl)
 
         }
 
