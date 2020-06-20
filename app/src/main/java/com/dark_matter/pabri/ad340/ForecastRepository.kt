@@ -24,7 +24,7 @@ class ForecastRepository {
         val call = createOpenWeatherMapService().currentWeather(zipcode, "imperial", BuildConfig.OPEN_WEATHER_MAP_API_KEY)
         call.enqueue(object : retrofit2.Callback<CurrentWeather> {
             override fun onFailure(call: Call<CurrentWeather>, t: Throwable) {
-                Log.e(ForecastRepository::class.java.simpleName, "error loading for weekly forecast", t)
+                Log.e(ForecastRepository::class.java.simpleName, "error loading location for weekly forecast", t)
             }
 
             override fun onResponse(
@@ -49,7 +49,7 @@ class ForecastRepository {
                         override fun onResponse(call: Call<WeeklyForecast>, response: Response<WeeklyForecast>) {
                             val weeklyForecastResponse = response.body()
                             if (weeklyForecastResponse != null) {
-                                _currentWeather.value = weatherResponse
+                                _weeklyForecast.value = weeklyForecastResponse
                             }
                         }
 

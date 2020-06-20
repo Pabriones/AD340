@@ -5,9 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dark_matter.pabri.ad340.ForecastDetailsFragmentArgs
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 private val DATE_FORMAT = SimpleDateFormat("MM-dd-yyyy")
 
@@ -31,7 +30,6 @@ class ForecastDetailsViewModel (args: ForecastDetailsFragmentArgs) : ViewModel()
             description = args.description,
             date = DATE_FORMAT.format(Date(args.date * 1000)),
             iconUrl = "http://openweathermap.org/img/wn/${args.icon}@2x.png"
-
         )
     }
 

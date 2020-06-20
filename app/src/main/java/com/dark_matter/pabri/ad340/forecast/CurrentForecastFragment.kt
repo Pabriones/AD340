@@ -68,7 +68,6 @@ class CurrentForecastFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-
     companion object {
         const val KEY_ZIPCODE = "key_zipcode"
 

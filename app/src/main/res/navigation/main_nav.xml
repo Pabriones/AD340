@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/forecastDetailsFragment"
-        android:name="com.dark_matter.pabri.ad340.ForecastDetailsFragment"
+        android:name="com.dark_matter.pabri.ad340.location.ForecastDetailsFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_forecast_details" >
         <argument
